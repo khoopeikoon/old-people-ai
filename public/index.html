@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ask Your Kid</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💬</text></svg>">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="top">
+    <button type="button" class="link-button" id="home-button" hidden>← Ask something else</button>
+    <div class="text-size" role="group" aria-label="Text size">
+      <span>Text size</span>
+      <button type="button" id="smaller-text" aria-label="Make text smaller">A−</button>
+      <button type="button" id="bigger-text" aria-label="Make text bigger">A+</button>
+    </div>
+  </header>
+
+  <main id="app">
+    <!-- 1. Ask -->
+    <section id="screen-ask" class="screen">
+      <h1>What do you need help with?</h1>
+      <p class="lead">Ask it just like you'd ask your son or daughter. There are no silly questions.</p>
+
+      <form id="ask-form">
+        <label for="question" class="visually-hidden">Your question</label>
+        <textarea id="question" rows="4" placeholder="For example: How do I make the writing bigger on my phone?" required></textarea>
+        <div class="row">
+          <button type="button" id="mic-button" class="secondary" hidden>🎤 Say it out loud</button>
+          <button type="submit" class="primary">Ask</button>
+        </div>
+      </form>
+
+      <h2 class="examples-heading">Or tap one of these:</h2>
+      <div class="examples" id="examples"></div>
+    </section>
+
+    <!-- 2. Thinking -->
+    <section id="screen-loading" class="screen" hidden>
+      <div class="spinner" aria-hidden="true"></div>
+      <p class="lead" role="status">Let me think about that for a moment…</p>
+    </section>
+
+    <!-- 3. Choose how to get help -->
+    <section id="screen-choose" class="screen" hidden>
+      <h1 id="answer-title"></h1>
+      <div id="answer-warning" class="warning" role="alert" hidden></div>
+      <p class="lead" id="answer-intro"></p>
+      <h2>How would you like help?</h2>
+      <div class="choices">
+        <button type="button" class="choice" id="choose-steps">
+          <span class="choice-icon" aria-hidden="true">🤝</span>
+          <span class="choice-title">Show me, one step at a time</span>
+          <span class="choice-sub" id="steps-count"></span>
+        </button>
+        <a class="choice" id="choose-google" target="_blank" rel="noopener noreferrer">
+          <span class="choice-icon" aria-hidden="true">🔎</span>
+          <span class="choice-title">Look it up on Google</span>
+          <span class="choice-sub">Opens Google in a new tab with your question already typed in</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- 4. Step by step -->
+    <section id="screen-step" class="screen" hidden>
+      <p class="progress-label" id="step-label"></p>
+      <div class="progress" aria-hidden="true"><div class="progress-bar" id="progress-bar"></div></div>
+
+      <div class="step-card" tabindex="-1" id="step-card">
+        <p class="step-instruction" id="step-instruction"></p>
+        <p class="step-see" id="step-see" hidden></p>
+      </div>
+
+      <div id="stuck-answer" class="stuck-answer" hidden></div>
+
+      <div class="row">
+        <button type="button" class="secondary" id="read-aloud">🔊 Read it to me</button>
+        <button type="button" class="secondary" id="stuck-button">😕 I'm stuck</button>
+      </div>
+
+      <form id="stuck-form" class="stuck-form" hidden>
+        <label for="stuck-problem">What's happening? (you can leave this empty)</label>
+        <textarea id="stuck-problem" rows="2" placeholder="For example: I can't find that button"></textarea>
+        <div class="row">
+          <button type="button" class="secondary" id="stuck-cancel">Never mind</button>
+          <button type="submit" class="primary">Help me with this step</button>
+        </div>
+      </form>
+
+      <nav class="step-nav">
+        <button type="button" class="secondary big" id="prev-step">← Back</button>
+        <button type="button" class="primary big" id="next-step">Done, next step →</button>
+      </nav>
+    </section>
+
+    <!-- 5. Finished -->
+    <section id="screen-done" class="screen" hidden>
+      <p class="celebrate" aria-hidden="true">🎉</p>
+      <h1>You did it!</h1>
+      <p class="lead">Well done. If it didn't quite work, that's okay. You can go through it again or look it up instead.</p>
+      <div class="choices">
+        <button type="button" class="choice" id="restart-steps">
+          <span class="choice-icon" aria-hidden="true">🔁</span>
+          <span class="choice-title">Go through the steps again</span>
+        </button>
+        <a class="choice" id="done-google" target="_blank" rel="noopener noreferrer">
+          <span class="choice-icon" aria-hidden="true">🔎</span>
+          <span class="choice-title">Look it up on Google</span>
+        </a>
+        <button type="button" class="choice" id="ask-another">
+          <span class="choice-icon" aria-hidden="true">💬</span>
+          <span class="choice-title">Ask something else</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- Error -->
+    <section id="screen-error" class="screen" hidden>
+      <h1>Oops, that didn't work</h1>
+      <p class="lead" id="error-message"></p>
+      <div class="choices">
+        <button type="button" class="choice" id="error-retry">
+          <span class="choice-icon" aria-hidden="true">🔁</span>
+          <span class="choice-title">Try again</span>
+        </button>
+        <a class="choice" id="error-google" target="_blank" rel="noopener noreferrer">
+          <span class="choice-icon" aria-hidden="true">🔎</span>
+          <span class="choice-title">Look it up on Google instead</span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

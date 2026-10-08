@@ -1,0 +1,17 @@
+{
+  "name": "old-people-ai",
+  "version": "0.1.0",
+  "description": "Ask the questions you'd ask your kid. Get a Google link or a patient, step-by-step walkthrough.",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.132.1"
+  }
+}
